@@ -1,87 +1,53 @@
+'use client'
+
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function Header() {
+  const [open, setOpen] = useState(false)
+
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/services', label: 'Services' },
+    { href: '/packages', label: 'Packages' },
+    { href: '/order', label: 'Submit Request' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/dashboard', label: 'Dashboard' },
+    { href: '/admin', label: 'Admin' },
+  ]
+
   return (
-    <header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        background: 'rgba(255,255,255,0.94)',
-        backdropFilter: 'blur(14px)',
-        borderBottom: '1px solid rgba(8,31,69,0.10)',
-      }}
-    >
-      <div
-        className="site-container"
-        style={{
-          minHeight: 76,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 18,
-        }}
-      >
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+    <header className="site-header">
+      <div className="site-container header-inner">
+        <Link href="/" className="brand-link" onClick={() => setOpen(false)}>
           <img
             src="/images/logo.png"
             alt="Submit Mate BD"
             width={58}
             height={58}
-            style={{
-              width: 58,
-              height: 58,
-              objectFit: 'contain',
-              borderRadius: 14,
-            }}
+            className="brand-logo"
           />
 
-          <div>
-            <div
-              style={{
-                color: '#06172f',
-                fontSize: 21,
-                fontWeight: 900,
-                lineHeight: 1,
-              }}
-            >
-              Submit Mate <span style={{ color: '#1463e8' }}>BD</span>
+          <div className="brand-text">
+            <div className="brand-title">
+              Submit Mate <span>BD</span>
             </div>
 
-            <div
-              style={{
-                color: '#64748b',
-                fontSize: 12,
-                fontWeight: 800,
-                marginTop: 5,
-              }}
-            >
+            <div className="brand-subtitle">
               Academic Support Platform
             </div>
           </div>
         </Link>
 
-        <nav
-          className="desktop-nav"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 22,
-            color: '#334155',
-            fontWeight: 800,
-            fontSize: 15,
-          }}
-        >
-          <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/packages">Packages</Link>
-          <Link href="/order">Submit Request</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/dashboard">Dashboard</Link>
-          <Link href="/admin">Admin</Link>
+        <nav className="desktop-nav">
+          {navLinks.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div className="header-actions">
           <Link href="/login" className="btn-outline">
             Login
           </Link>
@@ -90,7 +56,50 @@ export default function Header() {
             Get Support
           </Link>
         </div>
+
+        <button
+          type="button"
+          className="mobile-menu-button"
+          onClick={() => setOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+        >
+          {open ? '✕' : '☰'}
+        </button>
       </div>
+
+      {open && (
+        <div className="mobile-panel">
+          <div className="site-container mobile-panel-inner">
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <div className="mobile-panel-actions">
+              <Link
+                href="/login"
+                className="btn-outline"
+                onClick={() => setOpen(false)}
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/order"
+                className="btn-main"
+                onClick={() => setOpen(false)}
+              >
+                Get Support
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

@@ -418,3 +418,278 @@ img {
     font-size: 13px;
   }
 }
+/* Mobile responsive final fixes */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(8, 31, 69, 0.1);
+}
+
+.header-inner {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  min-width: 0;
+}
+
+.brand-title {
+  color: #06172f;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.brand-title span {
+  color: #1463e8;
+}
+
+.brand-subtitle {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.mobile-menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(8, 31, 69, 0.14);
+  border-radius: 14px;
+  background: white;
+  color: #06172f;
+  font-size: 24px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.mobile-panel {
+  display: none;
+  border-top: 1px solid rgba(8, 31, 69, 0.08);
+  background: white;
+}
+
+.mobile-panel-inner {
+  padding: 14px 0 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.mobile-panel-inner a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  background: #f8fbff;
+  color: #06172f;
+  font-weight: 900;
+}
+
+.mobile-panel-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.clean-table {
+  min-width: 760px;
+}
+
+@media (max-width: 980px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-button {
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .mobile-panel {
+    display: block;
+  }
+
+  .header-actions {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-top: 24px !important;
+  }
+
+  .site-container,
+  .container-ui,
+  .section {
+    width: min(100% - 22px, 1220px) !important;
+  }
+
+  .dark-card,
+  .brand-card,
+  .card-ui,
+  .card {
+    border-radius: 20px !important;
+    padding: 20px !important;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 12vw, 3rem) !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 10vw, 2.8rem) !important;
+  }
+
+  h2 {
+    font-size: clamp(1.55rem, 8vw, 2.2rem) !important;
+  }
+
+  p {
+    font-size: 15px !important;
+  }
+
+  .poster-frame {
+    border-radius: 22px !important;
+    border-width: 5px !important;
+  }
+
+  .stat-card {
+    padding: 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .service-icon {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 16px !important;
+    font-size: 22px !important;
+  }
+
+  .btn-main,
+  .btn-blue,
+  .btn-outline,
+  .btn-primary,
+  .btn-secondary,
+  .btn-yellow {
+    width: 100% !important;
+    min-height: 48px !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+  }
+
+  .input-ui,
+  .input,
+  .modern-input {
+    min-height: 48px !important;
+    border-radius: 14px !important;
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+  }
+
+  .badge,
+  .badge-ui {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.4;
+    padding: 8px 12px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.05em !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .header-inner {
+    min-height: 64px;
+    gap: 10px;
+  }
+
+  .brand-logo {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .brand-title {
+    font-size: 16px;
+  }
+
+  .brand-subtitle {
+    font-size: 10px;
+  }
+
+  .mobile-menu-button {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+
+  .site-container,
+  .container-ui,
+  .section {
+    width: min(100% - 18px, 1220px) !important;
+  }
+
+  .dark-card,
+  .brand-card,
+  .card-ui,
+  .card {
+    padding: 16px !important;
+    border-radius: 18px !important;
+  }
+
+  .clean-table th,
+  .clean-table td {
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+  }
+}
