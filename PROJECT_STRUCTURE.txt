@@ -1,0 +1,23 @@
+frontend/
+  app/
+    page.tsx
+    login/page.tsx
+    register/page.tsx
+    services/page.tsx
+    order/page.tsx
+    dashboard/page.tsx
+    admin/page.tsx
+    about/page.tsx
+    contact/page.tsx
+  components/
+    Header.tsx
+    Footer.tsx
+    ServiceCards.tsx
+  lib/
+    api.ts
+  public/images/
+    logo.png
+    live-banner.png
+    quality.png
+    simple.png
+    formatting.png
