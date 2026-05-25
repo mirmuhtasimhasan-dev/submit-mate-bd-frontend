@@ -288,7 +288,7 @@ export default function OrderPage() {
   }
 
   return (
-    <main style={{ padding: '42px 0 20px' }}>
+    <main className="order-page" style={{ padding: '42px 0 20px' }}>
       <div className="site-container">
         <section className="dark-card" style={{ padding: 34, marginBottom: 30 }}>
           <span className="badge badge-dark">Submit Support Request</span>
@@ -320,7 +320,7 @@ export default function OrderPage() {
           </p>
         </section>
 
-        <form onSubmit={submit} className="brand-card" style={{ padding: 34 }}>
+        <form onSubmit={submit} className="brand-card order-form" style={{ padding: 34 }}>
           <div
             style={{
               display: 'grid',

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 
 const contactInfo = {
   whatsapp: '+8801XXXXXXXXX',
@@ -37,7 +37,6 @@ export default function ContactPage() {
     }
 
     setMsg('Thanks. Your message has been prepared. Contact backend will be connected later.')
-
     setName('')
     setEmail('')
     setPhone('')
@@ -45,45 +44,20 @@ export default function ContactPage() {
   }
 
   return (
-    <main style={{ padding: '42px 0 24px' }}>
+    <main className="contact-page">
       <div className="site-container">
-        <section className="dark-card" style={{ padding: 34, marginBottom: 28 }}>
+        <section className="dark-card contact-hero">
           <span className="badge badge-dark">Contact Support</span>
 
-          <h1
-            style={{
-              margin: '18px 0 0',
-              color: 'white',
-              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              fontWeight: 900,
-              lineHeight: 1.08,
-            }}
-          >
-            Need academic support?
-          </h1>
+          <h1>Need academic support?</h1>
 
-          <p
-            style={{
-              marginTop: 14,
-              color: '#dbeafe',
-              fontSize: 17,
-              lineHeight: 1.8,
-              maxWidth: 850,
-            }}
-          >
+          <p>
             Contact Submit Mate BD for assignment guidance, research support,
             formatting help, presentation design, citation support, study
             materials, and mentoring.
           </p>
 
-          <div
-            style={{
-              display: 'flex',
-              gap: 12,
-              flexWrap: 'wrap',
-              marginTop: 24,
-            }}
-          >
+          <div className="contact-hero-actions">
             <Link href="/order" className="btn-main">
               Submit Request
             </Link>
@@ -94,14 +68,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <section
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 22,
-            marginBottom: 24,
-          }}
-        >
+        <section className="contact-card-grid">
           <ContactCard
             icon="💬"
             title="WhatsApp"
@@ -135,63 +102,31 @@ export default function ContactPage() {
           />
         </section>
 
-        <section
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1fr) minmax(320px, 0.8fr)',
-            gap: 24,
-            alignItems: 'start',
-          }}
-        >
-          <div className="brand-card" style={{ padding: 28 }}>
+        <section className="contact-main-grid">
+          <div className="brand-card contact-form-card">
             <span className="badge">Send Message</span>
 
-            <h2
-              style={{
-                margin: '14px 0 8px',
-                color: '#06172f',
-                fontSize: 30,
-                fontWeight: 900,
-              }}
-            >
-              Contact form
-            </h2>
+            <h2>Contact form</h2>
 
-            <p
-              style={{
-                margin: '0 0 20px',
-                color: '#64748b',
-                lineHeight: 1.7,
-                fontWeight: 700,
-              }}
-            >
+            <p className="contact-muted">
               Fill up the form below. This is a frontend contact form UI for
               now. Backend message saving can be connected later.
             </p>
 
             {msg && (
               <div
-                style={{
-                  borderRadius: 16,
-                  padding: 14,
-                  background: msg.includes('required') ? '#fee2e2' : '#dcfce7',
-                  color: msg.includes('required') ? '#991b1b' : '#166534',
-                  fontWeight: 900,
-                  marginBottom: 18,
-                }}
+                className={
+                  msg.includes('required')
+                    ? 'contact-alert contact-alert-error'
+                    : 'contact-alert contact-alert-success'
+                }
               >
                 {msg}
               </div>
             )}
 
-            <form onSubmit={submitContact}>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                  gap: 16,
-                }}
-              >
+            <form onSubmit={submitContact} className="contact-form">
+              <div className="contact-form-grid">
                 <Field label="Name *">
                   <input
                     className="input"
@@ -233,27 +168,24 @@ export default function ContactPage() {
                 </Field>
               </div>
 
-              <div style={{ marginTop: 16 }}>
-                <Field label="Message *">
-                  <textarea
-                    className="input"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Write your message"
-                    required
-                    rows={6}
-                    style={{ resize: 'vertical' }}
-                  />
-                </Field>
-              </div>
+              <Field label="Message *">
+                <textarea
+                  className="input"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Write your message"
+                  required
+                  rows={6}
+                />
+              </Field>
 
-              <button type="submit" className="btn-main" style={{ marginTop: 20 }}>
+              <button type="submit" className="btn-main contact-submit">
                 Submit Message
               </button>
             </form>
           </div>
 
-          <aside className="brand-card" style={{ padding: 28 }}>
+          <aside className="brand-card contact-info-card">
             <span className="badge">Support Info</span>
 
             <InfoRow label="Support Hours" value={contactInfo.supportHours} />
@@ -264,34 +196,10 @@ export default function ContactPage() {
               value="Academic guidance, research support, formatting, citation, presentation design, study materials, viva and exam preparation."
             />
 
-            <div
-              style={{
-                marginTop: 22,
-                borderRadius: 22,
-                padding: 20,
-                background: '#f8fbff',
-                border: '1px solid rgba(8,31,69,0.10)',
-              }}
-            >
-              <h3
-                style={{
-                  margin: 0,
-                  color: '#06172f',
-                  fontSize: 22,
-                  fontWeight: 900,
-                }}
-              >
-                Quick action
-              </h3>
+            <div className="contact-quick-card">
+              <h3>Quick action</h3>
 
-              <p
-                style={{
-                  margin: '10px 0 16px',
-                  color: '#64748b',
-                  lineHeight: 1.7,
-                  fontWeight: 700,
-                }}
-              >
+              <p>
                 Ready to submit your support request? Go to the order page and
                 choose your service.
               </p>
@@ -325,61 +233,23 @@ function ContactCard({
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noreferrer' : undefined}
-      className="brand-card"
-      style={{
-        padding: 24,
-        display: 'block',
-        transition: '0.2s ease',
-      }}
+      className="brand-card contact-card"
     >
       <div className="service-icon">{icon}</div>
 
-      <h3
-        style={{
-          margin: '16px 0 0',
-          color: '#06172f',
-          fontSize: 23,
-          fontWeight: 900,
-        }}
-      >
-        {title}
-      </h3>
+      <h3>{title}</h3>
 
-      <p
-        style={{
-          margin: '8px 0 0',
-          color: '#1463e8',
-          fontWeight: 900,
-          wordBreak: 'break-word',
-        }}
-      >
-        {value}
-      </p>
+      <p className="contact-card-value">{value}</p>
 
-      <p
-        style={{
-          margin: '8px 0 0',
-          color: '#64748b',
-          lineHeight: 1.6,
-          fontWeight: 700,
-        }}
-      >
-        {note}
-      </p>
+      <p className="contact-card-note">{note}</p>
     </a>
   )
 }
 
-function Field({
-  label,
-  children,
-}: {
-  label: string
-  children: React.ReactNode
-}) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <label style={{ display: 'grid', gap: 8 }}>
-      <span style={{ color: '#06172f', fontWeight: 900 }}>{label}</span>
+    <label className="contact-field">
+      <span>{label}</span>
       {children}
     </label>
   )
@@ -387,35 +257,9 @@ function Field({
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div
-      style={{
-        borderBottom: '1px solid rgba(8,31,69,0.08)',
-        padding: '16px 0',
-      }}
-    >
-      <p
-        style={{
-          margin: 0,
-          color: '#64748b',
-          fontSize: 13,
-          fontWeight: 900,
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-        }}
-      >
-        {label}
-      </p>
-
-      <p
-        style={{
-          margin: '7px 0 0',
-          color: '#06172f',
-          lineHeight: 1.7,
-          fontWeight: 800,
-        }}
-      >
-        {value}
-      </p>
+    <div className="contact-info-row">
+      <p>{label}</p>
+      <strong>{value}</strong>
     </div>
   )
 }

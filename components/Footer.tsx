@@ -1,142 +1,73 @@
 import Link from 'next/link'
 
+const contact = {
+  facebook: 'https://www.facebook.com/share/1KoJ8Y4geU/',
+  instagram: 'https://www.instagram.com/submitmatebd?igsh=MW5kZWUweGN6YjQ3aA==',
+  whatsapp: '+8801XXXXXXXXX',
+  email: 'submitmatebd@gmail.com',
+}
+
 export default function Footer() {
+  const whatsappLink = `https://wa.me/${contact.whatsapp.replace(/\D/g, '')}`
+
   return (
-    <footer
-      style={{
-        background: '#06172f',
-        color: 'white',
-        marginTop: 80,
-      }}
-    >
-      <div
-        className="site-container"
-        style={{
-          padding: '58px 0 28px',
-        }}
-      >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
-            gap: 32,
-          }}
-        >
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <img
-                src="/images/logo.png"
-                alt="Submit Mate BD"
-                width={58}
-                height={58}
-                style={{
-                  width: 58,
-                  height: 58,
-                  objectFit: 'contain',
-                  borderRadius: 14,
-                }}
-              />
+    <footer className="modern-footer">
+      <div className="site-container">
+        <div className="footer-main">
+          <div className="footer-brand">
+            <Link href="/" className="footer-logo-row">
+              <img src="/images/logo.png" alt="Submit Mate BD" />
 
               <div>
-                <h3 style={{ margin: 0, fontSize: 22, fontWeight: 900 }}>
-                  Submit Mate BD
-                </h3>
-
-                <p
-                  style={{
-                    margin: '4px 0 0',
-                    color: '#bfdbfe',
-                    fontWeight: 700,
-                  }}
-                >
-                  Academic Support Platform
-                </p>
+                <h3>Submit Mate BD</h3>
+                <p>Academic Support Platform</p>
               </div>
-            </div>
+            </Link>
 
-            <p style={{ marginTop: 18, color: '#dbeafe', lineHeight: 1.8 }}>
-              We provide academic guidance, research support, formatting help,
-              presentation design, citation support, study materials, viva and
-              exam preparation, and mentoring.
+            <p className="footer-short-text">
+              Student-friendly academic guidance, formatting, citation,
+              presentation, research support, and mentoring.
             </p>
           </div>
 
-          <div>
-            <h4 style={{ fontSize: 18, fontWeight: 900 }}>Quick Links</h4>
+          <div className="footer-links-box">
+            <h4>Quick Links</h4>
 
-            <div
-              style={{
-                display: 'grid',
-                gap: 12,
-                marginTop: 16,
-                color: '#dbeafe',
-              }}
-            >
+            <div className="footer-links">
               <Link href="/services">Services</Link>
               <Link href="/packages">Packages</Link>
               <Link href="/order">Submit Request</Link>
-              <Link href="/dashboard">Student Dashboard</Link>
+              <Link href="/dashboard">Dashboard</Link>
               <Link href="/contact">Contact</Link>
-              <Link href="/admin">Admin Panel</Link>
             </div>
           </div>
 
-          <div>
-            <h4 style={{ fontSize: 18, fontWeight: 900 }}>Support Areas</h4>
+          <div className="footer-social-box">
+            <h4>Connect</h4>
 
-            <div
-              style={{
-                display: 'grid',
-                gap: 12,
-                marginTop: 16,
-                color: '#dbeafe',
-              }}
-            >
-              <p style={{ margin: 0 }}>Assignment Guidance</p>
-              <p style={{ margin: 0 }}>Research Support</p>
-              <p style={{ margin: 0 }}>Report Formatting</p>
-              <p style={{ margin: 0 }}>Presentation Design</p>
-              <p style={{ margin: 0 }}>Citation Support</p>
-              <p style={{ margin: 0 }}>Viva and Exam Preparation</p>
-            </div>
-          </div>
+            <div className="footer-socials">
+  <a href={contact.facebook} target="_blank" rel="noreferrer">
+    Follow on Facebook
+  </a>
 
-          <div>
-            <h4 style={{ fontSize: 18, fontWeight: 900 }}>
-              Academic Integrity
-            </h4>
+  <a href={contact.instagram} target="_blank" rel="noreferrer">
+    Follow on Instagram
+  </a>
 
-            <p style={{ marginTop: 16, color: '#dbeafe', lineHeight: 1.8 }}>
-              Submit Mate BD provides learning support, guidance, formatting,
-              and mentoring. Students remain responsible for their own final
-              submission.
-            </p>
+  <a href={whatsappLink} target="_blank" rel="noreferrer">
+    Chat on WhatsApp
+  </a>
+</div>
 
-            <Link
-              href="/contact"
-              className="btn-main"
-              style={{ marginTop: 18 }}
-            >
-              Contact Support
-            </Link>
+            <a href={`mailto:${contact.email}`} className="footer-email">
+              {contact.email}
+            </a>
           </div>
         </div>
 
-        <div
-          style={{
-            marginTop: 34,
-            paddingTop: 20,
-            borderTop: '1px solid rgba(255,255,255,0.14)',
-            color: '#bfdbfe',
-            fontSize: 14,
-            display: 'flex',
-            justifyContent: 'space-between',
-            gap: 14,
-            flexWrap: 'wrap',
-          }}
-        >
-          <span>© {new Date().getFullYear()} Submit Mate BD. All rights reserved.</span>
-          <span>Safe academic support and student mentoring.</span>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Submit Mate BD</span>
+          <span>Safe academic support and mentoring.</span>
         </div>
       </div>
     </footer>
