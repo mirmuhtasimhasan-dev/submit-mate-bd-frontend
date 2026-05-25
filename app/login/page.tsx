@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState, type FormEvent } from 'react'
-import { api, setAuth } from '../../lib/api'
+import { api, saveAuth } from '../../lib/api'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('student@submitmatebd.test')
@@ -12,6 +12,7 @@ export default function LoginPage() {
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+
     setLoading(true)
     setMsg('Logging in...')
 
@@ -31,7 +32,7 @@ export default function LoginPage() {
         throw new Error('Login response missing token or user.')
       }
 
-      setAuth(token, user)
+      saveAuth(token, user)
 
       setMsg('Login successful. Redirecting...')
 
@@ -121,11 +122,13 @@ export default function LoginPage() {
                       background: '#ffcf32',
                       color: '#06172f',
                       fontWeight: 900,
+                      flexShrink: 0,
                     }}
                   >
                     ✓
                   </span>
-                  {item}
+
+                  <span>{item}</span>
                 </div>
               ))}
             </div>
@@ -164,6 +167,7 @@ export default function LoginPage() {
             <form onSubmit={submit} style={{ display: 'grid', gap: 16 }}>
               <div>
                 <label className="label-ui">Email</label>
+
                 <input
                   className="input-ui"
                   type="email"
@@ -176,6 +180,7 @@ export default function LoginPage() {
 
               <div>
                 <label className="label-ui">Password</label>
+
                 <input
                   className="input-ui"
                   type="password"
@@ -206,10 +211,14 @@ export default function LoginPage() {
                 style={{
                   marginTop: 18,
                   borderRadius: 16,
-                  background: '#f8fbff',
+                  background: msg.toLowerCase().includes('failed')
+                    ? '#fee2e2'
+                    : '#f8fbff',
                   border: '1px solid rgba(20,99,232,0.14)',
                   padding: 14,
-                  color: '#06172f',
+                  color: msg.toLowerCase().includes('failed')
+                    ? '#991b1b'
+                    : '#06172f',
                   fontWeight: 800,
                 }}
               >
@@ -242,8 +251,8 @@ export default function LoginPage() {
                 style={{
                   borderRadius: 16,
                   padding: 14,
-                  background: '#fff8e8',
-                  border: '1px solid rgba(246,184,0,0.20)',
+                  background: '#f8fbff',
+                  border: '1px solid rgba(8,31,69,0.08)',
                 }}
               >
                 <strong style={{ color: '#06172f' }}>Admin Demo:</strong>{' '}
@@ -259,8 +268,11 @@ export default function LoginPage() {
                 fontWeight: 700,
               }}
             >
-              No account?{' '}
-              <Link href="/register" style={{ color: '#1463e8', fontWeight: 900 }}>
+              New student?{' '}
+              <Link
+                href="/register"
+                style={{ color: '#1463e8', fontWeight: 900 }}
+              >
                 Create account
               </Link>
             </p>

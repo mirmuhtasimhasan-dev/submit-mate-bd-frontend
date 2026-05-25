@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { api, setAuth } from '../../lib/api'
+import { api, saveAuth } from '../../lib/api'
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -26,10 +26,19 @@ export default function RegisterPage() {
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+
     setLoading(true)
     setMsg('Creating account...')
 
     try {
+      if (form.password.length < 8) {
+        throw new Error('Password must be at least 8 characters.')
+      }
+
+      if (form.password !== form.password_confirmation) {
+        throw new Error('Password confirmation does not match.')
+      }
+
       const res = await api('/register', {
         method: 'POST',
         body: JSON.stringify(form),
@@ -42,7 +51,7 @@ export default function RegisterPage() {
         throw new Error('Registration response missing token or user.')
       }
 
-      setAuth(token, user)
+      saveAuth(token, user)
 
       setMsg('Account created successfully. Redirecting...')
 
@@ -100,6 +109,7 @@ export default function RegisterPage() {
             <form onSubmit={submit} style={{ display: 'grid', gap: 16 }}>
               <div>
                 <label className="label-ui">Full Name</label>
+
                 <input
                   className="input-ui"
                   name="name"
@@ -112,6 +122,7 @@ export default function RegisterPage() {
 
               <div>
                 <label className="label-ui">Email</label>
+
                 <input
                   className="input-ui"
                   name="email"
@@ -125,6 +136,7 @@ export default function RegisterPage() {
 
               <div>
                 <label className="label-ui">Password</label>
+
                 <input
                   className="input-ui"
                   name="password"
@@ -138,6 +150,7 @@ export default function RegisterPage() {
 
               <div>
                 <label className="label-ui">Confirm Password</label>
+
                 <input
                   className="input-ui"
                   name="password_confirmation"
@@ -169,10 +182,18 @@ export default function RegisterPage() {
                 style={{
                   marginTop: 18,
                   borderRadius: 16,
-                  background: '#f8fbff',
+                  background:
+                    msg.toLowerCase().includes('failed') ||
+                    msg.toLowerCase().includes('password')
+                      ? '#fee2e2'
+                      : '#f8fbff',
                   border: '1px solid rgba(20,99,232,0.14)',
                   padding: 14,
-                  color: '#06172f',
+                  color:
+                    msg.toLowerCase().includes('failed') ||
+                    msg.toLowerCase().includes('password')
+                      ? '#991b1b'
+                      : '#06172f',
                   fontWeight: 800,
                 }}
               >
@@ -262,6 +283,14 @@ export default function RegisterPage() {
                 </div>
               ))}
             </div>
+
+            <Link
+              href="/services"
+              className="btn-outline"
+              style={{ marginTop: 24 }}
+            >
+              Explore Services
+            </Link>
           </section>
         </div>
       </div>
