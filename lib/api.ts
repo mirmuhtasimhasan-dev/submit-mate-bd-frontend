@@ -101,14 +101,6 @@ export function clearAuth() {
 }
 
 export async function logout() {
-  try {
-    await api('/logout', {
-      method: 'POST',
-    })
-  } catch {
-    // ignore logout API error
-  }
-
   clearAuth()
 
   if (typeof window !== 'undefined') {
@@ -156,8 +148,8 @@ export function normalizeList(response: any, key?: string) {
 export async function api(path: string, options: RequestInit = {}) {
   const baseUrl = getApiBaseUrl()
   const token = getToken()
-  const cleanPath = path.startsWith('/') ? path : `/${path}`
 
+  const cleanPath = path.startsWith('/') ? path : `/${path}`
   const isFormData = options.body instanceof FormData
 
   const headers: Record<string, string> = {
@@ -207,13 +199,7 @@ export async function downloadProtectedFile(
   })
 
   if (!response.ok) {
-    const contentType = response.headers.get('content-type') || ''
-
-    const data = contentType.includes('application/json')
-      ? await response.json()
-      : await response.text()
-
-    throw normalizeError(data)
+    throw new Error('File download failed.')
   }
 
   const blob = await response.blob()
